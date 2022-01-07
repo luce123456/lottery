@@ -1,0 +1,403 @@
+@charset "utf-8";
+html { height: 100%; width: 100%;
+    min-width: 980px;
+    min-height: 535px;}
+body { margin:0px; padding:0px;  font-family:"微软雅黑"; -webkit-user-select:none;word-wrap:break-word;word-break:break-all; width:100%; height:100%; overflow: hidden; background:url(../images/bg.jpg)  no-repeat; background-color:#000; background-size: 100% 100%;}
+ul,li { margin:0px; padding:0px; list-style:none;}
+img { border:0px;}
+
+#btn_change li {border:2px solid #fff;color:#fff;} /*按钮颜色*/
+#joinCount,#top_notice { color:#fff;} /*顶部滚动通知和参与人数的文字颜色*/
+
+
+.c { clear:both;}
+
+a.middleBtn { padding:0 15px;font-size:20px; height:40px; line-height:40px;}
+
+
+
+.module { position:absolute; top:0; left:0; right:0;
+    bottom: 0;
+    margin: auto;height:535px;
+    max-width: 980px;
+    width: 100%; display:none;}
+
+.closeBtn { position:absolute; height:30px; width:30px; right:0; top:0; z-index:9999; color:#afafaf; font-size:20px; font-family:Arial, Helvetica, sans-serif; line-height:30px; text-align:center; cursor:pointer;}
+span.title { font-size:24px; padding:0 180px 0 30px; height: 50px; line-height: 50px; display:block; background: rgba(0,0,0,0.5); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+a {text-decoration:none; cursor:pointer; outline:none; transition:all 0.5s;-moz-transition:all 0.5s; /* Firefox 4 */-webkit-transition:all 0.5s; /* Safari and Chrome */-o-transition:all 0.5s; /* Opera */}
+#canvas { position: fixed; top: 0; left: 0; z-index: 9999; opacity: 0.8;}
+
+.light { position:absolute; left:50%; margin-left:-530px; top:50%; margin-top:-530px; background:url(../images/light.png) no-repeat; background-size:100%;  width:1060px; height:1060px;-webkit-animation: lightRotate 5s linear infinite; z-index: 9999;}
+@-webkit-keyframes lightRotate {
+    0% { -webkit-transform: rotateZ(0deg); }
+    100% { -webkit-transform: rotateZ(360deg);}
+}
+a.btn { display:inline-block; padding:6px 20px;  border-radius:5px;}
+a.arrow {     position: absolute;
+    display: block;
+    width: 40px;
+    height: 40px;
+    top: 50%;
+    margin-top: -25px;
+    opacity: 0.5;
+    font-size: 40px;
+    line-height: 40px;}
+a.arrow i { font-size:25px;}
+a.left { left:0px;}
+a.right { right:-10px;}
+a.arrow:hover { opacity:1;}
+.description { height:100%;}
+.animate-bg { position: fixed; z-index: 9999; top: 0; width: 100%; bottom: 0;}
+i { font-style:normal;}
+h1,h2,h3 { font-weight:normal;}
+a.reclick,a.submitUser {background: -webkit-gradient(linear, 0 0, 0 100%, from(#1e7e05), to(rgb(19,101,5)));display:block; width:122px; height:42px; line-height:40px; color:#fff; font-size:18px; text-align:center; left:50%; margin-left:-135px; cursor:pointer; position:absolute; bottom:40px; font-size:24px;}
+a.submitUser { margin-left:20px;}
+a.reclick:hover,a.submitUser:hover {background: -webkit-gradient(linear, 0 0, 0 100%, from(#259c05), to(rgb(8,127,0)));}
+a.gray { border-radius:3px; background: #b3b3b3;}
+a.gray:hover { border-radius:3px; background: #b3b3b3;}
+
+.blackbg { background:#000; opacity:0.8; position:fixed; height:100%; width:100%; top:0; bottom:0; left:0; right:0; z-index:9999;}
+/*操作提示*/
+.info-box { position:fixed; top:40%; margin-top:-15px; text-align:center; z-index: 99999; width: 100%;}
+.error {  height:50px; line-height:50px; font-size: 20px; color:#fd5353; background:#ffe4e4; border-radius:5px; padding: 0 20px; margin: auto; display: inline-block;}
+.success {height:50px; line-height:50px; font-size: 20px; color:#32a523; background:#ddffd8; border-radius:5px; padding: 0 20px; margin: auto; display: inline-block;}
+
+/*自定义表情*/
+
+#loading { position:fixed; top:350px; left:50%; margin-left:-175px; width:350px; height:150px; line-height:10px; z-index:9999999;text-align:center; color:#fff; font-size:30px;}
+#loading img { display:block; margin:auto;}
+
+
+/*****颜色设置****/
+body {background-color:#000;color:#fff;}
+a { color:#fff;}
+a.btn { color:#fff; background:#0ea69a;} /*按钮背景色*/
+a.btn:hover {background:#079287;}
+a.stopBtn { background: #917149;}
+a.stopBtn:hover { background: #ff6c00;}
+a.graybg { border-radius:3px; background: #e5e5e5; color: #6f6f6f;}
+a.graybg:hover { border-radius:3px; background: #d2d2d2;}
+.closeBtn {background:rgba(0,0,0,0.6);}
+.closeBtn:hover {background:rgba(0,0,0,1);}
+.module[data-modulename=messagewalldanmu] { background: none;}
+a.disabled {background:#8b8b8b;}
+a.disabled:hover {background:#8b8b8b;}
+.title { color:#fff;}
+#btn_change li {border:2px solid #ececec;color:#fff;}
+#top_notice { color:#fff;}
+.description { background:#fff;}
+.bgColor1 { height:160px}
+
+.moduleBtn { display:none;}
+/*提示*/
+.tips { position:absolute; background:#fff; border-radius:3px; height:30px; z-index:99999; display:block; top:100px; color:#505050; padding:0px 10px; line-height:30px;}
+.tips_arrow { font-size:30px; position:absolute;color:#fff; z-index:99999;}
+
+/*老虎机*/
+#tigerBg {height:270px; width:92%; position:relative; background:}
+#tigerUserBox { position:relative; width:100%; height:80px;  margin-top: 15px; z-index: 100; }
+#tigerUserBox li { position: relative;}
+#tigerUserBox li a { display: none; font-size: 12px;  width: 40px; height: 20px; line-height: 20px; text-align: center; border-radius: 5px; background: rgba(0,0,0,.6); color: #fff; position: absolute; top: 0px; right: 5px;}
+#tigerUserBox li:hover a { display: block;}
+#tigerUser span.prizeTitle { position: absolute; left: 20px; width: 15px; top: 12px; opacity: 0.7; font-size: 14px;}
+#tigerUser ul { position: relative;
+    height: 80px;}
+#tigerUser li { display:inline-block; height:68px; width:85px; text-align: center;
+    margin-right: 1px;}
+#tigerUser li img { width:83px; height:66px; border-radius:10px; margin: auto; display: block; border:1px solid #fff;}
+#tigerUser span {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+}
+
+#tigerUser span.NickName {
+    top: 32px;
+    font-size: 16px;
+}
+
+#tigerUser span.Phone {
+    top: 13px;
+    font-size: 12px;
+}
+
+#tigerUser {     padding: 0 40px 0 82px;
+    width: 95%;
+    box-sizing: border-box;
+    height: 100px;
+    position: absolute;
+    left: 0px;
+    right: 0;
+    margin: auto;
+    bottom: 22px;
+    border-radius: 5px;
+    z-index: 100;
+    background: rgba(0,0,0,0.3);}
+#tigerUser a { color:#fff;}
+#tigerUser a.left { left: 50px;}
+#tigerUser a i { font-size: 38px;}
+#tigerUser a.right { right: -4px;}
+.tigerMain {width:95%; height:279px; position:absolute; top:-5px;text-align: center;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+#tigerSelect a.beginTiger_on { background: #efdd02d1 !important;}
+#tigerSelect a.btn.beginTiger { background: #3b8dbc;}
+#tigerSelect .shade1 {
+    position: absolute;
+    width: 63%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+#tigerSelect .shade2 {
+    position: absolute;
+    width: 23%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: 999;
+}
+#tigerSelect { text-align: center;position: relative; color: #fff; width: 95%; margin: auto; border-radius: 5px; font-size: 20px; line-height: 65px;margin-top: 100px;}
+#tigerSelect .select_option { overflow:auto;}
+#tigerSelect .select_option a,#tigerSelect .select a { margin-left:0; word-break:normal; }
+#tigerSelect a.btn {margin-left: 20px; font-size: 35px; width:90px ; height: 65px;}
+.tigerList {  width:120px; margin-left:30px; height: 258px; display: inline-block;  position: relative; vertical-align: top; }
+.tigerList div { width: 200%; position: absolute; top: 8px; height: 270px; overflow: hidden;}
+.tigerList div ul { width:100%; font-size: 8; position: absolute; top: 0;}
+.tigerList div ul li img { width:496px; height:296px; border:2px solid #fff; border-radius: 10px; margin-top: 0px;position: absolute;
+    top: 0;
+    left: 0;}
+.tigerList div ul li { width:100%; height:300px;
+    position: relative;}
+
+.tigerList span {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+}
+.tigerList span.NickName {
+    top: 65px;
+    font-size: 18px;
+}
+.tigerList span.Phone {
+    top: 40px;
+    font-size: 14px;
+}
+.oneTiger { width: 730px; left: 76px;}
+.oneTiger .tigerList div { width: 500px; height: 300px; top: 0px; margin-left: -185px;}
+.oneTiger .tigerList { width: 120px;margin-left: 20px;}
+.oneTiger .tigerList ul li { width: 120px;}
+/*.oneTiger .tigerList ul li img { width: 110px; height:110px; margin-top: 0;}*/
+.oneUser { height: 270px;}
+.oneUser div { top:8px; height: 150px;}
+#tigerTitle { color: #fff;font-size: 26px; position: absolute; left: 40px; top: 8px; background: url(../images/tigertitle.png) left center no-repeat; padding-left: 80px;}
+#tigerLight { background: url(../images/tiger_light1.png) no-repeat; width: 100%; height: 535px; position: absolute; left: 0; top: 0;
+    z-index: 0;
+    animation: changeLight 1s ease-in-out infinite;
+    -moz-animation: changeLight 1s ease-in-out infinite; /* Firefox */
+    -webkit-animation: changeLight 1s ease-in-out infinite; /* Safari 和 Chrome */
+    -o-animation: changeLight 1s ease-in-out infinite;
+}
+@keyframes changeLight {
+    0% {
+        background-image:url(../images/tiger_light1.png);background-size:100% 100%;
+    }
+    49% {
+        background-image:url(../images/tiger_light1.png);background-size:100% 100%;
+    }
+    50% {
+        background-image:url(../images/tiger_light2.png);background-size:100% 100%;
+    }
+    100% {
+        background-image:url(../images/tiger_light2.png);background-size:100% 100%;
+    }
+}
+
+@-moz-keyframes changeLight /* Firefox */
+{
+    0% {
+        background-image:url(../images/tiger_light1.png);background-size:100% 100%;
+    }
+    49% {
+        background-image:url(../images/tiger_light1.png);background-size:100% 100%;
+    }
+    50% {
+        background-image:url(../images/tiger_light2.png);background-size:100% 100%;
+    }
+    100% {
+        background-image:url(../images/tiger_light2.png);background-size:100% 100%;
+    }
+}
+
+@-webkit-keyframes changeLight /* Safari 和 Chrome */
+{
+    0% {
+        background-image:url(../images/tiger_light1.png);background-size:100% 100%;
+    }
+    49% {
+        background-image:url(../images/tiger_light1.png);background-size:100% 100%;
+    }
+    50% {
+        background-image:url(../images/tiger_light2.png);background-size:100% 100%;
+    }
+    100% {
+        background-image:url(../images/tiger_light2.png);background-size:100% 100%;
+    }
+}
+
+@-o-keyframes changeLight /* Opera */
+{
+    0% {
+        background-image:url(../images/tiger_light1.png);background-size:100% 100%;
+    }
+    49% {
+        background-image:url(../images/tiger_light1.png);background-size:100% 100%;
+    }
+    50% {
+        background-image:url(../images/tiger_light2.png);background-size:100% 100%;
+    }
+    100% {
+        background-image:url(../images/tiger_light2.png);background-size:100% 100%;
+    }
+}
+#showPrizeUser { position: absolute; width: 100%; left: 0; right: 0; margin-top: -250px;  top: 50%;  text-align: center; z-index: 999999;}
+#showPrizeUser ul { display:inline-block;margin: auto; background: #000; max-width: 800px; padding: 20px; border-radius: 20px;}
+#showPrizeUser li { border-radius: 10px; border: 2px solid rgba(255,255,255,0.6); width: 120px; height: 82px; display: inline-block; overflow: hidden; position: relative; margin:10px 15px 15px 10px;}
+#showPrizeUser li img,.tigerUser img  { width: 100%;
+    height: 75px;}
+
+.tigerUser span {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+}
+.tigerUser span.NickName {
+    top: 42px;
+    font-size: 18px;
+}
+.tigerUser span.Phone {
+    top: 16px;
+    font-size: 14px;
+}
+div.bigImg,div.bigImg img { width: 220px; height: 142px;}
+div.bigImg span.NickName {
+    top: 75px;
+    font-size: 30px;
+}
+div.bigImg span.Phone {
+    top: 22px;
+    font-size: 22px;
+}
+div.normalImg { width: 116px; height: 70px;}
+#showPrizeUser ul.bigImg li { width: 220px; height: 142px;}
+#showPrizeUser ul.normalImg li { width: 116px; height: 70px;}
+
+/*中奖后的动画*/
+.blackbg { background:#000; opacity:0.8; position:fixed; height:100%; width:100%; top:0; bottom:0; left:0; right:0; z-index:9999;}
+.luckbg { position:absolute; top:50%;width:1500px;  height:970px; margin-top:-435px; left:50%; margin-left:-750px; z-index:9999; opacity:1;}
+.luckUserHead { border:2px solid #ecfc24; width:284px; border-radius:10px; height:284px; position:absolute; top:50%; left:50%; margin-left:-147px; margin-top:-500px; z-index:9999;}
+.luckUserName { display:block; width:284px; border-radius:0 0 10px 10px; height:45px; position:absolute; top:50%; left:50%; margin-left:-145px; margin-top:-500px; z-index:9999; text-align:center; background:rgba(0,0,0,0.6); color:#fff; font-size:30px; line-height:45px;overflow:hidden;}
+.showLuckLevel { width:500px; position:absolute; left:50%; margin-left:-250px; top:50%; margin-top:500px; text-align:center; color:#fffbcb; font-size:30px; z-index:9999;}
+.showLuckLevel span { color:#f0ff00; font-size:40px; position:relative; top:4px; margin-left:10px;}
+.windmill {display:block;position:absolute;width:1060px;height:1060px; top:50%; margin-top:-530px; left:50%; margin-left:-530px; z-index:9999; opacity: 0.5;}
+.windmill .spinning-wing{background:transparent url(../images/light.png) no-repeat 0px 0;width:1060px;height:1060px;margin:0;top:0;left:0;position:absolute;z-index:88;-webkit-transition-property:-webkit-transform;-webkit-transition-duration:1s;-moz-transition-property:-moz-transform;-moz-transition-duration:1s;-webkit-animation:rotate 4s linear infinite;-moz-animation:rotate 4s linear infinite;-o-animation:rotate 4s linear infinite;animation:rotate 4s linear infinite;}
+@-webkit-keyframes rotate{from{-webkit-transform:rotate(0deg)}
+    to{-webkit-transform:rotate(360deg)}
+}
+@-moz-keyframes rotate{from{-moz-transform:rotate(0deg)}
+    to{-moz-transform:rotate(359deg)}
+}
+@-o-keyframes rotate{from{-o-transform:rotate(0deg)}
+    to{-o-transform:rotate(359deg)}
+}
+@keyframes rotate{from{transform:rotate(0deg)}
+    to{transform:rotate(359deg)}
+}
+@-webkit-keyframes rotate2{from{-webkit-transform:rotate(0deg)}
+    to{-webkit-transform:rotate(360deg)}
+}
+@-moz-keyframes rotate2{from{-moz-transform:rotate(0deg)}
+    to{-moz-transform:rotate(359deg)}
+}
+@-o-keyframes rotate2{from{-o-transform:rotate(0deg)}
+    to{-o-transform:rotate(359deg)}
+}
+@keyframes rotate2{from{transform:rotate(0deg)}
+    to{transform:rotate(359deg)}
+}
+.flash { position:absolute; top:-100px; left:50%; margin-left:-800px; z-index:9999; display:none; opacity:0.5;}
+.fire {position:absolute; max-width:980px;width: 100%; left: 50%; margin-left: -490px; background:rgba(0,0,0,0.5);  text-align:center; z-index:9999; height: 535px; padding-top: 30px; box-sizing: border-box; top: -5000px;}
+.fire:before { content: ''; display: block; margin: auto; width: 500px; height:500px; background: url(../images/fire1.png) no-repeat; background-size: 100%;-webkit-animation: fireanimate .5s linear infinite;}
+@-webkit-keyframes fireanimate {
+    0% { background: url(../images/fire1.png) no-repeat; background-size: 100%; }
+    11% { background: url(../images/fire2.png) no-repeat; background-size: 100%; }
+    22% { background: url(../images/fire3.png) no-repeat; background-size: 100%; }
+    33% { background: url(../images/fire4.png) no-repeat; background-size: 100%; }
+    44% { background: url(../images/fire5.png) no-repeat; background-size: 100%; }
+    55% { background: url(../images/fire6.png) no-repeat; background-size: 100%; }
+    66% { background: url(../images/fire7.png) no-repeat; background-size: 100%; }
+    77% { background: url(../images/fire8.png) no-repeat; background-size: 100%; }
+    88% { background: url(../images/fire9.png) no-repeat; background-size: 100%; }
+    99% { background: url(../images/fire1.png) no-repeat; background-size: 100%; }
+}
+
+/*中奖列表*/
+.level { margin-bottom:20px; color:#ff4200;}
+.level label { font-size:20px; line-height:40px; height:40px; border-top:1px solid #cccccc; position:relative; top:-1px; padding-left:10px; color:#ff4200; display:block; border-bottom:1px solid #cccccc; background: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#e8e8e8));}
+.level label a { color:#FF3300;}
+.level label span { display:none;}
+.level font { color:#333333;}
+.hasSubmit { position:absolute; right:0; line-height:12px; top:50%; margin-top:-6px; font-size:12px; color:#C2C2C2;}
+
+
+#lables {
+
+    height: 40px;
+
+    margin-top: 50px;
+
+    margin-left: 180px
+
+    }          
+
+#lables ul {
+
+    list-style: none;              
+
+    margin-left: 50px;
+
+    }          
+
+#lables li {
+
+    display: block;
+
+    float: left;
+
+    }          
+
+#lables button {
+
+    line-height: 40px;
+
+    display: block;
+
+    color: rgb(0, 0, 0);
+
+    text-decoration: none;
+
+    padding: 0 20px;
+    
+    border-radius: 50px;
+
+    margin-right: 20px
+    }          
+
+
+
