@@ -397,7 +397,62 @@ div.normalImg { width: 116px; height: 70px;}
     border-radius: 50px;
 
     margin-right: 20px
-    }          
+    }     
+
+#lablesLeft {
+
+    height: 70%;
+    position: fixed;
+    z-index: 1;
+    top: 50px;
+    left: 20%;
+    overflow-x: hidden;
+
+}  
+
+#lablesLeft button {
+
+        line-height: 40px;
+    
+        display: block;
+    
+        color: rgb(0, 0, 0);
+    
+        text-decoration: none;
+    
+        padding: 0 20px;
+        
+        border-radius: 50px;
+    
+        margin-top: 20px
+}   
+
+#lablesRigth {
+
+    height: 70%;
+    position: fixed;
+    z-index: 1;
+    top: 50px;
+    left: 80%;
+    overflow-x: hidden;
+}  
+
+#lablesRigth button {
+
+        line-height: 40px;
+    
+        display: block;
+    
+        color: rgb(0, 0, 0);
+    
+        text-decoration: none;
+    
+        padding: 0 20px;
+        
+        border-radius: 50px;
+    
+        margin-top: 20px
+}  
 
 
 
