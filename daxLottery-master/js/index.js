@@ -1,6 +1,3 @@
-/**
- * Created by wugy on 2016/12/19.
- */
 $(function () {
     //初始化
     var selfModuleName = 'slotmachine';
@@ -20,7 +17,38 @@ $(function () {
                      {"Id": "6", "NickName": "zed",  "photo": "./images/C/zed.png", "base": "C"},
                      {"Id": "7", "NickName": "honly",  "photo": "./images/C/honly.png", "base": "C"},
                      {"Id": "8", "NickName": "Jack",  "photo": "./images/S/Jack.png", "base": "S"},
-                     {"Id": "9", "NickName": "lux",  "photo": "./images/S/lux.png", "base": "S"}
+                     {"Id": "9", "NickName": "lux",  "photo": "./images/S/lux.png", "base": "S"},
+                     {"Id": "10", "NickName": "Mike1" , "photo": "./images/S/mike.png" , "base": "S"},
+                     {"Id": "11", "NickName": "Alily1", "photo": "./images/S/Alily.png", "base": "S"},
+                     {"Id": "12", "NickName": "Lucy1",  "photo": "./images/C/lucy.png", "base": "C"},
+                     {"Id": "13", "NickName": "Jhon1",  "photo": "./images/C/Jhon.png", "base": "C"},
+                     {"Id": "14", "NickName": "Coco1",  "photo": "./images/S/coco.png", "base": "S"},
+                     {"Id": "15", "NickName": "Coust1",  "photo": "./images/C/Coust.png", "base": "C"},
+                     {"Id": "16", "NickName": "zed1",  "photo": "./images/C/zed.png", "base": "C"},
+                     {"Id": "17", "NickName": "honly1",  "photo": "./images/C/honly.png", "base": "C"},
+                     {"Id": "18", "NickName": "Jack1",  "photo": "./images/S/Jack.png", "base": "S"},
+                     {"Id": "19", "NickName": "lux1",  "photo": "./images/S/lux.png", "base": "S"},
+                     {"Id": "20", "NickName": "Mike2" , "photo": "./images/S/mike.png" , "base": "S"},
+                     {"Id": "21", "NickName": "Alily2", "photo": "./images/S/Alily.png", "base": "S"},
+                     {"Id": "22", "NickName": "Lucy2",  "photo": "./images/C/lucy.png", "base": "C"},
+                     {"Id": "23", "NickName": "Jhon2",  "photo": "./images/C/Jhon.png", "base": "C"},
+                     {"Id": "24", "NickName": "Coco2",  "photo": "./images/S/coco.png", "base": "S"},
+                     {"Id": "25", "NickName": "Coust2",  "photo": "./images/C/Coust.png", "base": "C"},
+                     {"Id": "26", "NickName": "zed2",  "photo": "./images/C/zed.png", "base": "C"},
+                     {"Id": "27", "NickName": "honly2",  "photo": "./images/C/honly.png", "base": "C"},
+                     {"Id": "28", "NickName": "Jack2",  "photo": "./images/S/Jack.png", "base": "S"},
+                     {"Id": "29", "NickName": "lux2",  "photo": "./images/S/lux.png", "base": "S"},
+                     {"Id": "30", "NickName": "Mike3" , "photo": "./images/S/mike.png" , "base": "S"},
+                     {"Id": "31", "NickName": "Alily3", "photo": "./images/S/Alily.png", "base": "S"},
+                     {"Id": "32", "NickName": "Lucy3",  "photo": "./images/C/lucy.png", "base": "C"},
+                     {"Id": "33", "NickName": "Jhon3",  "photo": "./images/C/Jhon.png", "base": "C"},
+                     {"Id": "34", "NickName": "Coco3",  "photo": "./images/S/coco.png", "base": "S"},
+                     {"Id": "35", "NickName": "Coust3",  "photo": "./images/C/Coust.png", "base": "C"},
+                     {"Id": "36", "NickName": "zed3",  "photo": "./images/C/zed.png", "base": "C"},
+                     {"Id": "37", "NickName": "honly3",  "photo": "./images/C/honly.png", "base": "C"},
+                     {"Id": "38", "NickName": "Jack3",  "photo": "./images/S/Jack.png", "base": "S"},
+                     {"Id": "39", "NickName": "lux3",  "photo": "./images/S/lux.png", "base": "S"},
+
                     ] //用户列表
     // var userArray2 = [
     //                 //{"Id": "0", "NickName": "Mike" , "photo": "./images/mike.png"},
@@ -37,6 +65,13 @@ $(function () {
     var ulHeight = 600;
     var ulHeightHalf = 300;
     var isSH = true;
+    var ulHTML;
+    var firstStart = true;
+
+    window.οnlοad=function(){ 
+        // 初始化内容 
+        setScrollDiv();
+    }
 
     var choose = function(){
         //element.style.color = "#ff0000";
@@ -94,6 +129,19 @@ $(function () {
                 beginTiger();
             } else {
                 stopTiger();
+                // if (isLotteryArray.length > 0) { //移除已中奖人
+                //     for (var i = 0; i < isLotteryArray.length; i++) {
+                //         $('.tigerMain li[data-userid=' + isLotteryArray[i] + ']').remove();
+                //         userArray.forEach(function(user, index, arr) {
+                //             if(user.Id==isLotteryArray[i]) {
+                //               arr.splice(index, 1);
+                //             }
+                //         });
+                        
+                //     }
+                // }
+                // console.log(userArray);
+                // setScrollDiv();
             }
         });
         $('.tiger_hidden').click(function () {
@@ -148,33 +196,16 @@ $(function () {
         $('.tigerMain').addClass('oneTiger');
         $('.tigerMain').html('');   //添加列
         for (var i = 0; i < scrollNumber; i++) {
-            $('.tigerMain').append('<div class="tigerList"><div><ul></ul></div></div>');
+            $('.tigerMain').append('<div class="tigerList"><div></div></div>');
         }
-        var maxNumber = 0;//要装进去的列
-        for (var i = 0; i < userArray.length; i++) { //把用户列表装入列
-            if (maxNumber == scrollNumber) {
-                maxNumber = 0;
-            }
-            console.log(isSH)
-            if(isSH){
-                if(userArray[i].base == "S"){
-                    $('.tigerList').eq(maxNumber).find('ul').append(
-                        '<li data-userid="' + userArray[i].Id + '" data-nickname="' + userArray[i].NickName + '" data-base="'+ userArray[i].base +'"><img class="NickName" src="'+ userArray[i].photo + '"></li>');
-                    maxNumber++;
-                
-                }
-            }
-            if(!isSH){
-                if(userArray[i].base == "C"){
-                    $('.tigerList').eq(maxNumber).find('ul').append(
-                        '<li data-userid="' + userArray[i].Id + '" data-nickname="' + userArray[i].NickName + '" data-base="'+ userArray[i].base +'"><img class="NickName" src="'+ userArray[i].photo + '"></li>');
-                    maxNumber++;
-                }
-            }
-            // $('.tigerList').eq(maxNumber).find('ul').append(
-            //     '<li data-userid="' + userArray[i].Id + '" data-nickname="' + userArray[i].NickName + '" data-base="'+ userArray[i].base +'"><img class="NickName" src="'+ userArray[i].photo + '"></li>');
-            // maxNumber++;
+        
+        //$('#id').html("修改内容")
+        if(firstStart){
+            ulHTML = createHTML();
+            firstStart = false;
         }
+        $('.tigerList').html(ulHTML);
+         
         $(".tigerList").addClass("wait");
         $('.tigerList').each(function () {  //复制列表，循环滚动
             var ul = $($(this).find('ul'));
@@ -186,7 +217,6 @@ $(function () {
                 ul.css('top', '0');
             }
         });
-        isSH = !isSH
     };
 
 
@@ -203,7 +233,6 @@ $(function () {
                       arr.splice(index, 1);
                     }
                 });
-                
             }
         }
         console.log(userArray);
@@ -271,7 +300,7 @@ $(function () {
                 );
             }, IntervalTimer * (i + 3));
         });
-        
+        ulHTML = createHTML();
     };
 
     var selectLotteryNumber = function (v) {
@@ -281,66 +310,49 @@ $(function () {
         setScrollDiv();
     }
 
-    //显示抽奖动画
-    var showLuckAnimate = function () {
-        FireworkShow();
-        var className = '';
-        $('body').append('<div class="light"></div>');
-        if (prizeNumber <= 3) {
-            className = 'bigImg';
-        } else if (prizeNumber > 3 && prizeNumber < 7) {
-            className = 'normalImg';
-        }
-        $('body').append('<div id="showPrizeUser"><ul class="' + className + '">' + prizeUserStr + '</ul></div>');
-        $('#showPrizeUser li').each(function () {
-            $('body').append('<div data-level="' + $(this).data('level') + '" data-nickname="' + $(this).data('nickname') + '" data-isluck="' + $(this).data('isluck') + '" style="left:' + $(this).offset().left + 'px;top:' + $(this).offset().top + 'px" class="tigerUser ' + className + '">' + $(this).html() + '</div>');
-            $(this).css('opacity', 0);
-        });
-        $("#slotmachineFlash").css('opacity', 1).show();
-        var _left = $('#tigerUserBox').offset().left;
-        var _top = $('#tigerUserBox').offset().top;
-
-        setTimeout(function () {
-            $('.tigerUser').each(function (index) {
-                var _this = $(this);
-                setTimeout(function () {
-                    _this.animate({
-                        'left': _left + 'px',
-                        'top': _top + 'px',
-                        'width': '70px',
-                        'height': '70px'
-                    }, 'slow', function () {
-                        $('#tigerUserBox ul').prepend('<li data-level="' + _this.data('level') + '" data-headpath="' + _this.data('headpath') + '" data-nickname="' + _this.data('nickname') + '" data-isluck="' + _this.data('isluck') + '" >' + _this.html() + '</li>');
-                        $('#tigerUserBox ul').width($('#tigerUserBox ul li').size() * tigerUserLiWidth).css('left', 0);
-                        _this.remove();
-                    });
-                }, index * 100);
-            });
-        }, 5000);
-        setTimeout(function () {
-            FireworkHide();
-            $(".light").animate({"opacity": "0"}, "slow", function () {
-                $(".light").remove();
-            });
-            $('#showPrizeUser').animate({'opacity': '0'}, 'slow', function () {
-                $('#showPrizeUser').remove();
-            });
-        }, 5500);
-        if (isLotteryArray.length > 0) { //移除已中奖人
-            for (var i = 0; i < isLotteryArray.length; i++) {
-                $('.tigerMain li[data-userid=' + isLotteryArray[i] + ']').remove();
-                for (var j = 0; j < userArray.length; j++) {
-                    if (isLotteryArray[i] == userArray[j].Id) {
-                        userArray.splice(j, 1);
-
-                    }
+    var createHTML = function(){
+        var div = document.createElement("div");
+        var UL = document.createElement("ul");
+        div.appendChild(UL);
+        console.log(isSH);
+        for (var i = 0; i < userArray.length; i++) { //把用户列表装入列
+            //console.log(isSH)
+            if(isSH){
+                if(userArray[i].base == "S"){
+                    var li = document.createElement("li");
+                    UL.appendChild(li);
+                    var img = document.createElement("img");
+                    li.appendChild(img);
+                    li.setAttribute("data-userid",userArray[i].Id);
+                    li.setAttribute("data-nickname",userArray[i].NickName);
+                    li.setAttribute("data-base",userArray[i].base);
+                    li.setAttribute("data-userid",userArray[i].Id);
+                    img.setAttribute("class","NickName");
+                    img.setAttribute("src", userArray[i].photo);
+                    // UL.append(
+                    //     '<li data-userid="' + userArray[i].Id + '" data-nickname="' + userArray[i].NickName + '" data-base="'+ userArray[i].base +'"><img class="NickName" src="'+ userArray[i].photo + '"></li>');
                 }
             }
-            userArray = userArray.sort(randomsort);
-            localStorage.DaxFans=JSON.stringify(userArray);
+            if(!isSH){
+                if(userArray[i].base == "C"){
+                    var li = document.createElement("li");
+                    UL.appendChild(li);
+                    var img = document.createElement("img");
+                    li.appendChild(img);
+                    li.setAttribute("data-userid",userArray[i].Id);
+                    li.setAttribute("data-nickname",userArray[i].NickName);
+                    li.setAttribute("data-base",userArray[i].base);
+                    li.setAttribute("data-userid",userArray[i].Id);
+                    img.setAttribute("class","NickName");
+                    img.setAttribute("src", userArray[i].photo);
+                    // UL.append(
+                    //     '<li data-userid="' + userArray[i].Id + '" data-nickname="' + userArray[i].NickName + '" data-base="'+ userArray[i].base +'"><img class="NickName" src="'+ userArray[i].photo + '"></li>');
+                }
+            }
         }
-        // setScrollDiv();
+        console.log(UL);
+        isSH = !isSH;
+        console.log(isSH);
+        return div;
     }
-
-    
 })
