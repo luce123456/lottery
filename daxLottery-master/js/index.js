@@ -7,6 +7,7 @@ $(function () {
     var prizeID = 0; //奖品ID
     var prizeNumber = 10; //抽奖人数
     var isLotteryArray = []; //中奖用户
+    var lotteryId;
     var userArray = [
                      {"Id": "0", "NickName": "Mike" , "photo": "./images/S/mike.png" , "base": "S"},
                      {"Id": "1", "NickName": "Alily", "photo": "./images/S/Alily.png", "base": "S"},
@@ -67,6 +68,7 @@ $(function () {
     var isSH = true;
     var ulHTML;
     var firstStart = true;
+    var count = 0;
 
     window.οnlοad=function(){ 
         // 初始化内容 
@@ -225,17 +227,6 @@ $(function () {
         $("ul>li>button").css("background-color","rgb(239, 239, 239)");
         $('#name').text('');
         console.log(isLotteryArray);
-        if (isLotteryArray.length > 0) { //移除已中奖人
-            for (var i = 0; i < isLotteryArray.length; i++) {
-                $('.tigerMain li[data-userid=' + isLotteryArray[i] + ']').remove();
-                userArray.forEach(function(user, index, arr) {
-                    if(user.Id==isLotteryArray[i]) {
-                      arr.splice(index, 1);
-                    }
-                });
-            }
-        }
-        console.log(userArray);
         setScrollDiv();
         // if(isLotteryArray[0].base=="S"){
         //     $('.tigerMain li[data-userid=' + isLotteryArray[i] + ']').remove();
@@ -258,7 +249,7 @@ $(function () {
 
     //滚动
     var beginScroll = function (obj, height, timer) {
-        obj.animate({'top': -height / 2 + ulHeightHalf + 'px'}, timer, 'linear', function () {
+        obj.animate({'top': -height / 4 + ulHeightHalf + 'px'}, timer, 'linear', function () {
             obj.css('top', -(height - ulHeight) + 'px');
             beginScroll(obj, height, timer);
         });
@@ -273,18 +264,21 @@ $(function () {
             setTimeout(function () {
                 ulBox.stop();
                 var _top = Math.ceil(parseInt(ulBox.css('top')) / ulHeightHalf) * ulHeightHalf; //向上取整，让它滚动到正确位置;
-                console.log("_top: "+_top)
+                //console.log("_top: "+_top)
                 ulBox.animate({'top': _top}, function () {
                     var userID; //中奖人信息
                     var userNickName;
                     ulBox.children('li').each(function () {
-                        console.log("li position:"+ -$(this).position().top)
+                        //console.log("li position:"+ -$(this).position().top)
                         var add = parseInt($(this).position().top) + _top;
                         if (add < 2 && add>-2) {
                             userID = $(this).data('userid');
                             userNickName = $(this).data('nickname');
                             console.log("1:"+userID);
                             isLotteryArray.push(userID);
+                            lotteryId=userID
+                            console.log("isLotteryArray:"+isLotteryArray);
+
                             $('#name').text(userNickName);
                                 // '<li data-userid="' + userArray[i].Id + '" data-nickname="' + userArray[i].NickName + '" data-base="'+ userArray[i].base +'"><img class="NickName" src="'+ userArray[i].photo + '"></li>');        
                             //$(this).append(
@@ -300,6 +294,24 @@ $(function () {
                 );
             }, IntervalTimer * (i + 3));
         });
+        // if (isLotteryArray.length > 0) { //移除已中奖人
+        //     console.log(".xxxxxx");
+        //     for (var i = 0; i < isLotteryArray.length; i++) {
+
+        //         userArray.forEach(function(user, index, arr) {
+                    
+        //             if(user.Id==isLotteryArray[i]) {
+        //               arr.splice(index, 1);
+        //             }
+        //         });
+        //     }
+        // }
+        userArray.forEach(function(user, index, arr) {
+                    
+            if(user.Id==lotteryId) {
+              arr.splice(index, 1);
+            }
+        });
         ulHTML = createHTML();
     };
 
@@ -311,10 +323,12 @@ $(function () {
     }
 
     var createHTML = function(){
+        console.log(userArray)
         var div = document.createElement("div");
         var UL = document.createElement("ul");
         div.appendChild(UL);
         console.log(isSH);
+        if (count>=4) {isSH=true;}
         for (var i = 0; i < userArray.length; i++) { //把用户列表装入列
             //console.log(isSH)
             if(isSH){
@@ -352,6 +366,7 @@ $(function () {
         }
         console.log(UL);
         isSH = !isSH;
+        count++;
         console.log(isSH);
         return div;
     }
