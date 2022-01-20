@@ -30,53 +30,5 @@
     top: 73.28170377541142%;
 }
 
-/*浏览器提示*/
-#nohtml5 {
-    background: #fff8d4;
-    z-index: 99999;
-    font-size: 14px;
-    height: 50px;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    width: 100%;
-    color: #837955;
-    opacity: 0.4;
-}
-
-#nohtml5 div {
-    max-width: 980px;
-    width: 100%;
-    padding-left: 40px;
-    margin: auto;
-    line-height: 50px;
-    background: url(../images/alert.jpg) left no-repeat;
-    height: 50px;
-}
-
-#nohtml5 a {
-    color: #837955;
-    margin-left: 10px;
-}
-
-#nohtml5 div img {
-    position: relative;
-    top: 5px;
-}
-
-.delnohtml5 {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #000;
-    color: #f00;
-    text-align: center;
-    line-height: 20px;
-    top: 15PX;
-    right: 0;
-    cursor: pointer;
-}
 
 

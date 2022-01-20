@@ -4,8 +4,6 @@ $(function () {
     var scrollTime = 200; //滚动速度
     var IntervalTimer = parseInt(Math.random() * 300);//间隔时间
     var scrollNumber = 1;//滚动列数,默认有5个
-    var prizeID = 0; //奖品ID
-    var prizeNumber = 10; //抽奖人数
     var isLotteryArray = []; //中奖用户
     var lotteryId;
     var userArray = [
@@ -49,20 +47,7 @@ $(function () {
                      {"Id": "37", "NickName": "honly3",  "photo": "./images/C/honly.png", "base": "C"},
                      {"Id": "38", "NickName": "Jack3",  "photo": "./images/S/Jack.png", "base": "S"},
                      {"Id": "39", "NickName": "lux3",  "photo": "./images/S/lux.png", "base": "S"},
-
                     ] //用户列表
-    // var userArray2 = [
-    //                 //{"Id": "0", "NickName": "Mike" , "photo": "./images/mike.png"},
-    //                 //{"Id": "1", "NickName": "Alily", "photo": "./images/Alily.png"},
-    //                 //{"Id": "2", "NickName": "Lucy",  "photo": "./images/lucy.png"},
-    //                 {"Id": "0", "NickName": "Jhon",  "photo": "./images/Jhon.png"},
-    //                 {"Id": "1", "NickName": "Coco",  "photo": "./images/coco.png"}
-    //                 ] 
-    var isLotteryScrollID = 0; //中奖名单滚动设置
-    var sotpTime = 1000; //停止抽奖时间
-    var prizeUserStr = '';
-    var tigerUserLiWidth = 120;
-    var tigerUserUlWidth = 513;
     var ulHeight = 600;
     var ulHeightHalf = 300;
     var isSH = true;
@@ -75,22 +60,6 @@ $(function () {
         setScrollDiv();
     }
 
-    var choose = function(){
-        //element.style.color = "#ff0000";
-        console.log("aaa");
-        
-    };
-
-
-
-    var isChrome = window.navigator.userAgent.indexOf("Chrome") !== -1;
-    if (!isChrome) {
-        $("body").prepend('<div id="nohtml5"><div>由于您正在使用非chrome浏览器,大屏幕的体验处于不佳状态,建议您立刻更换浏览器,以获得更好的用户体验。下载浏览器:<a href="http://www.chromeliulanqi.com/" target="blank"><img src="images/chrome.jpg"> chrome浏览器</a></div><span class="delnohtml5">X</span></div>');
-        $(".delnohtml5").click(function () {
-            $("#nohtml5").remove();
-        })
-    }
-
     $("ul>li>button").on('click', function () {
         console.log(this);
         console.log($(this).css("background-color"));
@@ -99,13 +68,6 @@ $(function () {
         }else{
             $(this).css("background-color","rgb(239, 239, 239)");
         }
-        //移除活动准备开始界面
-        // $("#index").remove();
-        // //在body上触发active事件
-        // $('body').triggerHandler('active');
-        // //在body上触发modulechange事件
-        // $('body').triggerHandler('modulechange', ["slotmachine"]);
-
     });
 
     //绑定开启活动按钮的点击事件
@@ -120,53 +82,13 @@ $(function () {
     });
     //slotmachineInit
     $('body').on('active', function () {
-        //选择人数时
-        $('#option_slotNumber a').click(function () {
-            selectLotteryNumber($(this));
-        });
-        
-        //点击开始按钮
         $('.beginTiger').click(function () {
             if (!$(this).hasClass('beginTiger_on')) {
                 beginTiger();
             } else {
                 stopTiger();
-                // if (isLotteryArray.length > 0) { //移除已中奖人
-                //     for (var i = 0; i < isLotteryArray.length; i++) {
-                //         $('.tigerMain li[data-userid=' + isLotteryArray[i] + ']').remove();
-                //         userArray.forEach(function(user, index, arr) {
-                //             if(user.Id==isLotteryArray[i]) {
-                //               arr.splice(index, 1);
-                //             }
-                //         });
-                        
-                //     }
-                // }
-                // console.log(userArray);
-                // setScrollDiv();
             }
         });
-        $('.tiger_hidden').click(function () {
-            if ($(this).hasClass('on')) {
-                $('#tigerUser').show();
-                $(this).removeClass('on');
-            } else {
-                $('#tigerUser').hide();
-                $(this).addClass('on');
-            }
-        });
-        //点击左箭头
-        $('#tigerUser a.left').mousedown(function () {
-            isLotteryScrollID = Math.max(0, isLotteryScrollID - 1);
-            $('#tigerUserBox ul').stop().animate({'left': Math.min(0, -isLotteryScrollID * tigerUserUlWidth)});
-        });
-        //点击右箭头
-        $('#tigerUser a.right').click(function () {
-            isLotteryScrollID = Math.min(Math.ceil($("#tigerUserBox ul").width() / tigerUserUlWidth) - 1, isLotteryScrollID + 1);
-            $('#tigerUserBox ul').stop().animate({'left': -tigerUserUlWidth * isLotteryScrollID});
-
-        });
-
     });
     $('body').on('modulechange', function (e, moduleName) {
         if (moduleName == selfModuleName) {
@@ -177,21 +99,6 @@ $(function () {
         }
     });
 
-    //获取用户
-    var GetFans = function () {
-        CommonLoading('数据加载中,请稍后');
-        // setScrollDiv();
-        CommonLoaded();
-    }
-
- 
-
-
-    function randomsort(a, b) {
-        return Math.random()>.5 ? -1 : 1;
-        //用Math.random()函数生成0~1之间的随机数与0.5比较，返回-1或1
-    }
-
     //初始化滚动界面
     var setScrollDiv = function () {
         scrollNumber = 1;
@@ -200,20 +107,16 @@ $(function () {
         for (var i = 0; i < scrollNumber; i++) {
             $('.tigerMain').append('<div class="tigerList"><div></div></div>');
         }
-        
-        //$('#id').html("修改内容")
         if(firstStart){
             ulHTML = createHTML();
             firstStart = false;
         }
         $('.tigerList').html(ulHTML);
-         
         $(".tigerList").addClass("wait");
         $('.tigerList').each(function () {  //复制列表，循环滚动
             var ul = $($(this).find('ul'));
             if (ul.children().size() > 1) {
                 ul.append(ul.html());
-                //ul.css('top', -ul.height()/2 + 'px');
                 ul.css('top', -ul.height() + ulHeight + 'px');
             } else {
                 ul.css('top', '0');
@@ -221,16 +124,12 @@ $(function () {
         });
     };
 
-
     //开始摇奖
     var beginTiger = function () {
         $("ul>li>button").css("background-color","rgb(239, 239, 239)");
         $('#name').text('');
         console.log(isLotteryArray);
         setScrollDiv();
-        // if(isLotteryArray[0].base=="S"){
-        //     $('.tigerMain li[data-userid=' + isLotteryArray[i] + ']').remove();
-        // }
         $('.beginTiger').html('Stop').addClass('beginTiger_on');
         $('.tigerList').each(function (i) {
             var ulBox = $(this).find('ul');
@@ -260,16 +159,13 @@ $(function () {
         isLotteryArray = [];
         $('.tigerList').each(function (i) {
             var ulBox = $(this).find('ul');
-            var _height = ulBox.height();
             setTimeout(function () {
                 ulBox.stop();
                 var _top = Math.ceil(parseInt(ulBox.css('top')) / ulHeightHalf) * ulHeightHalf; //向上取整，让它滚动到正确位置;
-                //console.log("_top: "+_top)
                 ulBox.animate({'top': _top}, function () {
                     var userID; //中奖人信息
                     var userNickName;
                     ulBox.children('li').each(function () {
-                        //console.log("li position:"+ -$(this).position().top)
                         var add = parseInt($(this).position().top) + _top;
                         if (add < 2 && add>-2) {
                             userID = $(this).data('userid');
@@ -278,36 +174,15 @@ $(function () {
                             isLotteryArray.push(userID);
                             lotteryId=userID
                             console.log("isLotteryArray:"+isLotteryArray);
-
                             $('#name').text(userNickName);
-                                // '<li data-userid="' + userArray[i].Id + '" data-nickname="' + userArray[i].NickName + '" data-base="'+ userArray[i].base +'"><img class="NickName" src="'+ userArray[i].photo + '"></li>');        
-                            //$(this).append(
-                              //  '<div style="position: absolute; top:-6px ;font-size: 26px; margin-left: -45px">'+ userNickName + '</div>');
-                        }
-    //                     if($(this).data('userid')==userID){
-    //                         $(this).append(
-    // '<div style="position: absolute; top:-6px ;font-size: 26px; margin-left: -45px">'+ userArray[i].NickName + '</div>'); }                  
+                        }                
                     });
-                    
                     $('.beginTiger').removeClass('beginTiger_on'); //改变摇杆样式
                     }
                 );
             }, IntervalTimer * (i + 3));
         });
-        // if (isLotteryArray.length > 0) { //移除已中奖人
-        //     console.log(".xxxxxx");
-        //     for (var i = 0; i < isLotteryArray.length; i++) {
-
-        //         userArray.forEach(function(user, index, arr) {
-                    
-        //             if(user.Id==isLotteryArray[i]) {
-        //               arr.splice(index, 1);
-        //             }
-        //         });
-        //     }
-        // }
-        userArray.forEach(function(user, index, arr) {
-                    
+        userArray.forEach(function(user, index, arr) {       
             if(user.Id==lotteryId) {
               arr.splice(index, 1);
             }
@@ -315,22 +190,12 @@ $(function () {
         ulHTML = createHTML();
     };
 
-    var selectLotteryNumber = function (v) {
-        $(v).parent().prev().find("a").html($(v).find("div").html());
-        $(v).parent().prev().find("a").attr({"data-number": $(v).data("number")});
-        prizeNumber = $(v).data("number");
-        setScrollDiv();
-    }
-
     var createHTML = function(){
-        console.log(userArray)
         var div = document.createElement("div");
         var UL = document.createElement("ul");
         div.appendChild(UL);
-        console.log(isSH);
         if (count>=4) {isSH=true;}
         for (var i = 0; i < userArray.length; i++) { //把用户列表装入列
-            //console.log(isSH)
             if(isSH){
                 if(userArray[i].base == "S"){
                     var li = document.createElement("li");
@@ -343,8 +208,6 @@ $(function () {
                     li.setAttribute("data-userid",userArray[i].Id);
                     img.setAttribute("class","NickName");
                     img.setAttribute("src", userArray[i].photo);
-                    // UL.append(
-                    //     '<li data-userid="' + userArray[i].Id + '" data-nickname="' + userArray[i].NickName + '" data-base="'+ userArray[i].base +'"><img class="NickName" src="'+ userArray[i].photo + '"></li>');
                 }
             }
             if(!isSH){
@@ -359,15 +222,11 @@ $(function () {
                     li.setAttribute("data-userid",userArray[i].Id);
                     img.setAttribute("class","NickName");
                     img.setAttribute("src", userArray[i].photo);
-                    // UL.append(
-                    //     '<li data-userid="' + userArray[i].Id + '" data-nickname="' + userArray[i].NickName + '" data-base="'+ userArray[i].base +'"><img class="NickName" src="'+ userArray[i].photo + '"></li>');
                 }
             }
         }
-        console.log(UL);
         isSH = !isSH;
         count++;
-        console.log(isSH);
         return div;
     }
 })
